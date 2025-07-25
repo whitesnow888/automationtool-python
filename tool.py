@@ -39,9 +39,8 @@ with sync_playwright() as p:
         # Click the radio button for "1か月後＞"
         page.click("input[value='1か月後＞']")
         print(f"Clicked radio button for '1か月後＞' {i+1} times")
-        time.sleep(5)
-    
-    for i in range(3):
+
+    for i in range(13):
         # Check if the radio button is disabled
         radio_button = page.query_selector("input[value='2週後＞']")
         if radio_button and radio_button.is_disabled():
@@ -50,10 +49,42 @@ with sync_playwright() as p:
         # Click the radio button for "2週後＞"
         page.click("input[value='2週後＞']")
         print(f"Clicked radio button for '2週後＞' {i+1} times")
-        time.sleep(5)
+    
+    # print("Please click on the target element to continue...")
+    # page.wait_for_selector('.time--table.time--th--date.bordernone.tdSelect.enable')
+    # page.eval_on_selector('.time--table.time--th--date.bordernone.tdSelect.enable', '''
+    #     element => new Promise(resolve => {
+    #         element.addEventListener('click', () => resolve());
+    #     })
+    # ''')
+    # print("Detected click on the target element. Continuing...")
+
+    
+    # page.wait_for_load_state('load')  # or 'networkidle' for a more robust wait
+    # page.click('input[class="c-btn_2 button-outline"]')
+    # page.wait_for_load_state('load')  # or 'networkidle' for a more robust wait
+    # page.click('input[class="c-btn_2 button-outline"]')
+
+    # print("Please click on the target element to continue...")
+    # page.wait_for_selector('.time--table.time--th--date.bordernone.tdSelect.enable')
+    # page.eval_on_selector('.time--table.time--th--date.bordernone.tdSelect.enable', '''
+    #     element => new Promise(resolve => {
+    #         element.addEventListener('click', () => resolve());
+    #     })
+    # ''')
+    # print("Detected click on the target element. Continuing...")
+
+    # print("Please click on the target element to continue...")
+    # page.wait_for_selector('.time--table.time--th.enable.bordernone.tdSelect')
+    # page.eval_on_selector('.time--table.time--th.enable.bordernone.tdSelect', '''
+    #     element => new Promise(resolve => {
+    #         element.addEventListener('click', () => resolve());
+    #     })
+    # ''')
+    # print("Detected click on the target element. Continuing...")
 
     # Wait for 30 seconds
-    time.sleep(30)
+    time.sleep(3000)
     
     # Close the browser
     browser.close()
