@@ -11,21 +11,6 @@ with sync_playwright() as p:
     page.goto("https://www.keishicho-gto.metro.tokyo.lg.jp/keishicho-u/reserve/offerList_detail?tempSeq=396&accessFrom=offerList")
     print("Navigated to the page")
 
-    # while True:
-    #     print("Reloading the page...")
-    #     # Reload the page
-    #     page.reload()
-    #     # Wait for the page to fully load
-    #     page.wait_for_load_state('load')
-    #     # Check if the #waitTime element exists
-    #     wait_time_element = page.query_selector('#waitTime')
-    #     if wait_time_element and wait_time_element.is_visible():
-    #         print("Found #waitTime element. Content loaded.")
-    #         break
-    #     else:
-    #         print("#WAITTIME not found or not visible, reloading again...")
-    #         time.sleep(2)  # optional small delay before next reload
-
     # Wait for the "WAITTIME" element to disappear, indicating site is ready
     page.wait_for_selector('#waitTime', state='detached', timeout=600000000)
     print("Site is ready for interaction.")
@@ -80,26 +65,50 @@ with sync_playwright() as p:
             print(f"{i}Cell with the specified class not found.")
     
     
-    time.sleep(1)
-    page.click('td#pc-0_6')
+    time.sleep(2)
 
+    page.click('td#pc-0_6')
+    page.click('td#pc-0_60')
+    page.click('td#pc-0_66')
+
+    # Click the Next button to proceed
     cell = page.query_selector('.c-btn_2.button-outline')
     cell.click()
 
     page.wait_for_load_state('load', timeout=60000)  # Wait for the page to load
     cell = page.query_selector('.c-btn_2.button-outline')
     cell.click()
-    print("current checking")
-
+    
     #read the main info from csv
     # Read the Excel file
-    df = pd.read_excel('asdasd.xlsx', header=None)
+    df = pd.read_excel('asd.xlsx', header=None)
 
     # The second row contains the data values
-    data_values = df.iloc[1]
+    data_values = df.iloc[:,1]
 
     print("Data values:", data_values.tolist())
+
+    page.wait_for_load_state('load', timeout=60000)  # Wait for the page to load
+    #input the data into the form
+    page.fill('input[id="switch_8691"]', data_values[0])  # 国籍(1)
+    # page.fill('input[id="item_2_textData"]', str(data_values[1]))  # 郵便番号
+    # page.select_option('select[id="switch_8820_city"]', value=data_values[3])  # 住所（都道府県）
+    # time.sleep(1)  # Wait for the options to load
+    # page.select_option('select[id="switch_8820_town"]', value=data_values[4])  # 住所（町・大字）
+    # time.sleep(1)  # Wait for the options to load
+    # page.select_option('select[id="switch_8820_block"]', value=str(data_values[5]))  # 住所（丁目・字）
     
+
+
+
+
+
+
+
+
+
+
+
     time.sleep(300000)
     
     # Close the browser
