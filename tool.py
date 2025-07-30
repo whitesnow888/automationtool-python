@@ -23,6 +23,8 @@ with sync_playwright() as p:
     page.fill('input[id="userLoginForm.userId"]', "k-ikeda@technosmile.co.jp")
     page.fill('input[id="userLoginForm.userPasswd"]', "Tokyo0Gaimen")
 
+
+    
     # Click the login button
     page.click('input[type="submit"]')
     print("Clicked the login button after filling in credentials")
