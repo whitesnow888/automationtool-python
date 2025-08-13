@@ -9,7 +9,7 @@ with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)  
         page = browser.new_page()
 
-        # Navigate to the  URL
+        # Navigate to the    URL
         page.goto("https://www.keishicho-gto.metro.tokyo.lg.jp/keishicho-u/reserve/offerList_detail?tempSeq=396&accessFrom=offerList")
         print("Navigated to the page")
 
